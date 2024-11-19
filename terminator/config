@@ -1,0 +1,71 @@
+[global_config]
+  title_transmit_bg_color = "#26a269"
+  suppress_multiple_term_dialog = True
+  putty_paste_style = True
+[keybindings]
+  preferences = <Primary>F10
+  help = <Primary>F1
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+    scrollback_lines = 50000
+[layouts]
+  [[default]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 1920:0
+      maximised = True
+      fullscreen = False
+      size = 2560, 1406
+      title = satole@E20001: ~
+      last_active_term = 068d77f3-2a70-4fe2-b36c-2473b68a99da
+      last_active_window = True
+    [[[child1]]]
+      type = VPaned
+      parent = child0
+      order = 0
+      position = 700
+      ratio = 0.49964311206281226
+    [[[child2]]]
+      type = HPaned
+      parent = child1
+      order = 0
+      position = 1278
+      ratio = 0.5001956947162427
+    [[[terminal3]]]
+      type = Terminal
+      parent = child2
+      order = 0
+      profile = default
+      uuid = 068d77f3-2a70-4fe2-b36c-2473b68a99da
+      directory = ""
+    [[[terminal4]]]
+      type = Terminal
+      parent = child2
+      order = 1
+      profile = default
+      uuid = 884717a0-6a14-4596-81ce-caafca316351
+      directory = ""
+    [[[child5]]]
+      type = HPaned
+      parent = child1
+      order = 1
+      position = 1278
+      ratio = 0.5001956947162427
+    [[[terminal6]]]
+      type = Terminal
+      parent = child5
+      order = 0
+      profile = default
+      uuid = 9fb1b43b-7ea8-4c07-bd92-eb479749a5a3
+      directory = ""
+    [[[terminal7]]]
+      type = Terminal
+      parent = child5
+      order = 1
+      profile = default
+      uuid = 72e1d098-ecfd-42a8-b4c0-cecc9666b321
+      directory = ""
+[plugins]
