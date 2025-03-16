@@ -122,7 +122,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.shell_aliases
+
+# editor-style command-line-editing
+autoload edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 # Shell integrations
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

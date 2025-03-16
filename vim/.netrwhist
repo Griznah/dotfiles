@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/bombom/.vim'
+let g:netrw_dirhist_1='/home/bombom/repos/k8s/div/bb-thyra-elise'
+let g:netrw_dirhist_0='/home/bombom/repos/k8s/media/audiobookshelf'
+let g:netrw_dirhist_9='/home/bombom/repos/k8s/security/cert-manager'
+let g:netrw_dirhist_8='/home/bombom/repos/k8s/network/traefik'
+let g:netrw_dirhist_7='/home/bombom/repos/k8s/network/traefik/resources'
+let g:netrw_dirhist_6='/home/bombom/repos/k8s/network/traefik.disabled'
+let g:netrw_dirhist_5='/home/bombom/repos/k8s/proxmox-csi-driver/secrets'
+let g:netrw_dirhist_4='/home/bombom/repos/k8s/nginx-test'
+let g:netrw_dirhist_3='/usr/lib/zfs-linux'
