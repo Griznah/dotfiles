@@ -1,4 +1,7 @@
 #!/bin/bash
+# This script is used to setup dotfiles on a new system
+# It can be used to backup existing dotfiles, install dependencies, deploy generic dotfiles and install zsh with personal configuration
+# Author: Ole-Magnus Sæther aka Griznah - 2025-03-17
 
 # Define variables
 DOTFILES_DIR="$HOME/repos/dotfiles"
@@ -12,7 +15,7 @@ backup_generic_dotfiles() {
   for file in "${GENERIC_CONFIG_FILES[@]}"; do
     if [ -f "$HOME/$file" ]; then
       echo "Backing up $file to $BACKUP_DIR"
-      mv "$HOME/$file" "$BACKUP_DIR/"
+      mv "$HOME/$file" "$BACKUP_DIR/$file-$(date +%Y%m%d)"
     fi
   done
   echo "Backup completed."
@@ -80,14 +83,14 @@ install_dependencies() {
   else
     echo "Homebrew is already installed."
   fi
-  # fzf and zoxide:
+  # Install fzf if needed
   if ! brew list fzf &>/dev/null; then
     echo "fzf not found. Installing fzf..."
     brew install fzf
   else
     echo "fzf is already installed."
   fi
-
+  # Install zoxide if needed
   if ! brew list zoxide &>/dev/null; then
     echo "zoxide not found. Installing zoxide..."
     brew install zoxide
@@ -101,16 +104,18 @@ install_dependencies() {
 main() {
   echo "Dotfiles Setup Script"
   echo "1) Backup existing dotfiles"
-  echo "2) Deploy generic dotfiles"
-  echo "3) Install dependencies"
-  echo "4) Exit"
+  echo "2) Install dependencies"
+  echo "3) Deploy generic dotfiles"
+  echo "4) Install and configure zsh"
+  echo "9) Exit"
   read -rp "Choose an option: " choice
 
   case $choice in
     1) backup_generic_dotfiles ;;
-    2) deploy_generic_dotfiles ;;
-    3) install_dependencies ;;
-    4) echo "Exiting..."; exit 0 ;;
+    2) install_dependencies ;;
+    3) deploy_generic_dotfiles ;;
+    4) install_zsh ;;
+    9) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main ;;
   esac
 }
