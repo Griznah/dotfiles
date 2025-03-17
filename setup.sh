@@ -47,10 +47,10 @@ install_zsh() {
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-completions.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-completions
   fi
-    # copy config files
-    cp "$DOTFILES_DIR"/shell/zshrc "$HOME"/.zshrc
-    cp "$DOTFILES_DIR"/shell/p10k.zsh "$HOME"/.p10k.zsh
-    cp "$DOTFILES_DIR"/shell/aliases.zsh "$ZSH_CUSTOM"/aliases.zsh
+    # link config files
+    ln -sf "$DOTFILES_DIR"/shell/zshrc "$HOME"/.zshrc
+    ln -sf "$DOTFILES_DIR"/shell/p10k.zsh "$HOME"/.p10k.zsh
+    ln -sf "$DOTFILES_DIR"/shell/aliases.zsh "$ZSH_CUSTOM"/aliases.zsh
     # change default shell to zsh
     chsh -s "$(which zsh)"
     echo "zsh installed and configured."
