@@ -72,7 +72,7 @@ deploy_generic_dotfiles() {
     vim +PluginInstall +qall
     if [ -d "$DOTFILES_DIR/vim" ]; then
       echo "Copy .vim directory"
-      cp -r "$DOTFILES_DIR/vim/*" "$HOME/.vim/*"
+      cp -r "$DOTFILES_DIR"/vim/* "$HOME/.vim/"
     else
       echo "Warning: vim directory not found in $DOTFILES_DIR"
     fi
