@@ -27,8 +27,10 @@ install_zsh() {
   # Check if zsh is installed
   if ! command -v zsh &>/dev/null; then
     echo "zsh not found. Installing zsh..."
-    # Add commands to install zsh here
-    # Example: sudo apt update && sudo apt install -y zsh
+    if ! command -v brew &>/dev/null; then
+      echo "Homebrew is not installed. Please install Homebrew via dependencies choice and rerun this choice after."
+      exit 1
+    fi
     brew install zsh
   else
     echo "zsh is already installed."
@@ -39,18 +41,19 @@ install_zsh() {
   else
     echo "Oh My Zsh is not installed."
     # Install oh-my-zsh
+    echo "You'll have to exit "
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     # Install Powerlevel10k theme
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/themes/powerlevel10k
     # Install zsh-autosuggestions, zsh-syntax-highlighting and zsh-completions
-    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-completions.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-completions
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-completions.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-completions
   fi
     # link config files
     ln -sf "$DOTFILES_DIR"/shell/zshrc "$HOME"/.zshrc
     ln -sf "$DOTFILES_DIR"/shell/p10k.zsh "$HOME"/.p10k.zsh
-    ln -sf "$DOTFILES_DIR"/shell/aliases.zsh "$ZSH_CUSTOM"/aliases.zsh
+    ln -sf "$DOTFILES_DIR"/shell/aliases.zsh "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/aliases.zsh
     # change default shell to zsh
     chsh -s "$(which zsh)"
     echo "zsh installed and configured."
@@ -95,6 +98,7 @@ install_dependencies() {
   if ! command -v brew &>/dev/null; then
     echo "Homebrew not found. Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   else
     echo "Homebrew is already installed."
   fi
