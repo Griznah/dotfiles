@@ -62,11 +62,19 @@ deploy_generic_dotfiles() {
   for file in "${GENERIC_CONFIG_FILES[@]}"; do
     if [ -f "$DOTFILES_DIR/$file" ]; then
       echo "Linking $file"
-      ln -sf "$DOTFILES_DIR/$file" "$HOME/$file"
+      ln -sf "$DOTFILES_DIR/$file" "$HOME/.${file}"
     else
       echo "Warning: $file not found in $DOTFILES_DIR"
     fi
   done
+  if printf '%s\n' "${GENERIC_CONFIG_FILES[@]}" | grep -q "vimrc"; then
+    if [ -d "$DOTFILES_DIR/vim" ]; then
+      echo "Linking vim directory"
+      ln -sf "$DOTFILES_DIR/vim" "$HOME/.vim"
+    else
+      echo "Warning: vim directory not found in $DOTFILES_DIR"
+    fi
+  fi
   echo "Dotfiles deployed."
 }
 
