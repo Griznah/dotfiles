@@ -68,10 +68,15 @@ deploy_generic_dotfiles() {
     fi
   done
   if printf '%s\n' "${GENERIC_CONFIG_FILES[@]}" | grep -q "vimrc"; then
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
+    if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+      echo "Vundle.vim not found. Cloning Vundle.vim..."
+      git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+      vim +PluginInstall +qall
+    else
+      echo "Vundle.vim already exists."
+    fi
     if [ -d "$DOTFILES_DIR/vim" ]; then
-      echo "Copy .vim directory"
+      echo "Copy contents of .vim directory"
       cp -r "$DOTFILES_DIR"/vim/* "$HOME/.vim/"
     else
       echo "Warning: vim directory not found in $DOTFILES_DIR"
