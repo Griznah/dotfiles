@@ -41,22 +41,38 @@ install_zsh() {
   else
     echo "Oh My Zsh is not installed."
     # Install oh-my-zsh
-    echo "You'll have to exit "
+    echo "You'll have to exit the Oh my Zsh after install for script to continue."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     # Install Powerlevel10k theme
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/themes/powerlevel10k
-    # Install zsh-autosuggestions, zsh-syntax-highlighting and zsh-completions
-    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-completions.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-completions
   fi
-    # link config files
-    ln -sf "$DOTFILES_DIR"/shell/zshrc "$HOME"/.zshrc
-    ln -sf "$DOTFILES_DIR"/shell/p10k.zsh "$HOME"/.p10k.zsh
-    ln -sf "$DOTFILES_DIR"/shell/aliases.zsh "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/aliases.zsh
-    # change default shell to zsh
-    chsh -s "$(which zsh)"
-    echo "zsh installed and configured."
+  # Define plugins to install
+  ZSH_PLUGINS=(
+    "zsh-users/zsh-autosuggestions"
+    "zsh-users/zsh-syntax-highlighting"
+    "zsh-users/zsh-completions"
+  )
+  # Install plugins if they do not already exist
+  for plugin in "${ZSH_PLUGINS[@]}"; do
+    plugin_name=$(basename "$plugin")
+    plugin_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/$plugin_name"
+    if [ ! -d "$plugin_dir" ]; then
+    echo "Installing $plugin_name..."
+    git clone "https://github.com/$plugin" "$plugin_dir"
+    else
+    echo "$plugin_name is already installed."
+    fi
+  done
+  # link config files
+  ln -sf "$DOTFILES_DIR"/shell/zshrc "$HOME"/.zshrc
+  ln -sf "$DOTFILES_DIR"/shell/p10k.zsh "$HOME"/.p10k.zsh
+  ln -sf "$DOTFILES_DIR"/shell/aliases.zsh "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/aliases.zsh
+  # change default shell to zsh, but first check if it's a valid choice
+  if ! grep -q "$(command -v zsh)" /etc/shells; then
+    command -v zsh | sudo tee -a /etc/shells
+  fi
+  chsh -s "$(which zsh)"
+  echo "zsh installed and configured."
 }
 
 # Function to deploy dotfiles
@@ -124,7 +140,7 @@ main() {
   echo "Dotfiles Setup Script"
   echo "1) Backup existing dotfiles"
   echo "2) Install dependencies"
-  echo "3) Deploy generic dotfiles"
+  echo "3) Deploy generic dotfiles (and some Vim plugins)"
   echo "4) Install and configure zsh"
   echo "9) Exit"
   read -rp "Choose an option: " choice
