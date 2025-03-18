@@ -6,16 +6,16 @@
 # Define variables
 DOTFILES_DIR="$HOME/repos/dotfiles"
 BACKUP_DIR="$HOME/dotfiles_backup"
-GENERIC_CONFIG_FILES=(".vimrc" ".gitconfig") # Add your dotfiles here
+GENERIC_CONFIG_FILES=("vimrc" "gitconfig") # Add your dotfiles here
 
 # Function to create a backup of existing dotfiles
 backup_generic_dotfiles() {
   echo "Creating backup of existing dotfiles..."
   mkdir -p "$BACKUP_DIR"
   for file in "${GENERIC_CONFIG_FILES[@]}"; do
-    if [ -f "$HOME/$file" ]; then
-      echo "Backing up $file to $BACKUP_DIR"
-      mv "$HOME/$file" "$BACKUP_DIR/$file-$(date +%Y%m%d)"
+    if [ -f "$HOME/.${file}" ]; then
+      echo "Backing up .${file} to $BACKUP_DIR"
+      cp "$HOME/.${file}" "$BACKUP_DIR/.${file}-$(date +%Y%m%d)"
     fi
   done
   echo "Backup completed."
