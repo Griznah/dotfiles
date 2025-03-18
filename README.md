@@ -7,7 +7,7 @@ Repo for my linux configurations
 clone the repo and execute setup:
 
 ```bash
-git clone git@github.com:Griznah/dotfiles.git "$HOME"/repos/dotfiles
+git clone [git@github.com:Griznah/dotfiles.git](https://github.com/Griznah/dotfiles.git) "$HOME"/repos/dotfiles
 cd "$HOME"/repos/dotfiles sh -c setup.sh
 ```
 
