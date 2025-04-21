@@ -27,6 +27,7 @@ install_zsh() {
   # Check if zsh is installed
   if ! command -v zsh &>/dev/null; then
     echo "zsh not found. Installing zsh..."
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     if ! command -v brew &>/dev/null; then
       echo "Homebrew is not installed. Please install Homebrew via dependencies choice and rerun this choice after."
       exit 1

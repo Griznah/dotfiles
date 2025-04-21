@@ -11,7 +11,7 @@ alias ai='sudo nala install -y'
 alias rf='rm -rf'
 alias please='sudo'
 alias fn='find . -iname'
-alias so='ssh odin'
+alias so='ssh bombom@odin'
 alias history='history 1'
 
 # Kubernetes related aliases
