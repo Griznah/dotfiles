@@ -14,7 +14,8 @@ alias fn='fd'
 alias so='ssh bombom@odin'
 alias history='history 1'
 
-# Kubernetes related aliases
+# DevOps related aliases
+alias tf='tofu'
 alias kubecm='kubectl kc'
 alias kctx='kubectx'
 alias kns='kubens'

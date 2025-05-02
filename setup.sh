@@ -136,13 +136,13 @@ install_common_software() {
 }
 
 # Function to install Kubernetes-related tools
-install_k8s_tools() {
+install_devops_tools() {
   echo "Installing Kubernetes tools..."
   ensure_homebrew_installed
   # List of Kubernetes tools to install
-  K8S_TOOLS=("argocd" "kubectl" "talosctl" "kustomize")
+  devops_tools=("argocd" "kubectl" "talosctl" "kustomize" "ansible" "opentofu")
 
-  for tool in "${K8S_TOOLS[@]}"; do
+  for tool in "${devops_tools[@]}"; do
     if ! brew list "$tool" &>/dev/null; then
       echo "$tool not found. Installing $tool..."
       brew install "$tool"
@@ -170,7 +170,7 @@ main() {
     2) install_common_software ;;
     3) deploy_generic_dotfiles ;;
     4) install_zsh ;;
-    8) install_k8s_tools ;;
+    8) install_devops_tools ;;
     9) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main ;;
   esac
