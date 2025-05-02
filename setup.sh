@@ -21,6 +21,17 @@ backup_generic_dotfiles() {
   echo "Backup completed."
 }
 
+# Function to ensure Homebrew is installed
+ensure_homebrew_installed() {
+  if ! command -v brew &>/dev/null; then
+    echo "Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  else
+    echo "Homebrew is already installed."
+  fi
+}
+
 # Function to install and setup zsh with personal configuration
 install_zsh() {
   echo "Installing zsh..."
@@ -108,15 +119,7 @@ deploy_generic_dotfiles() {
 # Function to install common software I use
 install_common_software() {
   echo "Installing dependencies..."
-  # Check if Homebrew is installed
-  if ! command -v brew &>/dev/null; then
-    echo "Homebrew not found. Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  else
-    echo "Homebrew is already installed."
-  fi
-
+  ensure_homebrew_installed
   # List of software to install
   SOFTWARE_LIST=("fzf" "zoxide" "eza" "bat" "yq" "sd" "fd" "ripgrep" "httpie" "ncdu" "duf")
 
@@ -132,6 +135,25 @@ install_common_software() {
   echo "Dependencies installed."
 }
 
+# Function to install Kubernetes-related tools
+install_k8s_tools() {
+  echo "Installing Kubernetes tools..."
+  ensure_homebrew_installed
+  # List of Kubernetes tools to install
+  K8S_TOOLS=("argocd" "kubectl" "talosctl" "kustomize")
+
+  for tool in "${K8S_TOOLS[@]}"; do
+    if ! brew list "$tool" &>/dev/null; then
+      echo "$tool not found. Installing $tool..."
+      brew install "$tool"
+    else
+      echo "$tool is already installed."
+    fi
+  done
+
+  echo "Kubernetes tools installed."
+}
+
 # Main menu
 main() {
   echo "Dotfiles Setup Script"
@@ -139,6 +161,7 @@ main() {
   echo "2) Install common software"
   echo "3) Deploy generic dotfiles (and some Vim plugins)"
   echo "4) Install and configure zsh"
+  echo "8) Install Kubernetes tools"
   echo "9) Exit"
   read -rp "Choose an option: " choice
 
@@ -147,6 +170,7 @@ main() {
     2) install_common_software ;;
     3) deploy_generic_dotfiles ;;
     4) install_zsh ;;
+    8) install_k8s_tools ;;
     9) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main ;;
   esac
