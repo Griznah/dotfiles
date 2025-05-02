@@ -118,7 +118,7 @@ install_common_software() {
   fi
 
   # List of software to install
-  SOFTWARE_LIST=("fzf" "zoxide" "eza" "bat" "yq" "sd" "fd" "ripgrep")
+  SOFTWARE_LIST=("fzf" "zoxide" "eza" "bat" "yq" "sd" "fd" "ripgrep" "httpie" "ncdu" "duf")
 
   for software in "${SOFTWARE_LIST[@]}"; do
     if ! brew list "$software" &>/dev/null; then
