@@ -10,7 +10,7 @@ alias pico='pico -cw'
 alias ai='sudo nala install -y'
 alias rf='rm -rf'
 alias please='sudo'
-alias fn='find . -iname'
+alias fn='fd'
 alias so='ssh bombom@odin'
 alias history='history 1'
 

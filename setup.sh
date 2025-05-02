@@ -105,12 +105,9 @@ deploy_generic_dotfiles() {
   echo "Dotfiles deployed."
 }
 
-# Function to install dependencies
-install_dependencies() {
+# Function to install common software I use
+install_common_software() {
   echo "Installing dependencies..."
-  # Add commands to install dependencies here
-  # Example: sudo apt update && sudo apt install -y vim git
-  #
   # Check if Homebrew is installed
   if ! command -v brew &>/dev/null; then
     echo "Homebrew not found. Installing Homebrew..."
@@ -119,20 +116,19 @@ install_dependencies() {
   else
     echo "Homebrew is already installed."
   fi
-  # Install fzf if needed
-  if ! brew list fzf &>/dev/null; then
-    echo "fzf not found. Installing fzf..."
-    brew install fzf
-  else
-    echo "fzf is already installed."
-  fi
-  # Install zoxide if needed
-  if ! brew list zoxide &>/dev/null; then
-    echo "zoxide not found. Installing zoxide..."
-    brew install zoxide
-  else
-    echo "zoxide is already installed."
-  fi
+
+  # List of software to install
+  SOFTWARE_LIST=("fzf" "zoxide" "eza" "bat" "yq" "sd" "fd" "ripgrep")
+
+  for software in "${SOFTWARE_LIST[@]}"; do
+    if ! brew list "$software" &>/dev/null; then
+      echo "$software not found. Installing $software..."
+      brew install "$software"
+    else
+      echo "$software is already installed."
+    fi
+  done
+
   echo "Dependencies installed."
 }
 
@@ -140,7 +136,7 @@ install_dependencies() {
 main() {
   echo "Dotfiles Setup Script"
   echo "1) Backup existing dotfiles"
-  echo "2) Install dependencies"
+  echo "2) Install common software"
   echo "3) Deploy generic dotfiles (and some Vim plugins)"
   echo "4) Install and configure zsh"
   echo "9) Exit"
@@ -148,7 +144,7 @@ main() {
 
   case $choice in
     1) backup_generic_dotfiles ;;
-    2) install_dependencies ;;
+    2) install_common_software ;;
     3) deploy_generic_dotfiles ;;
     4) install_zsh ;;
     9) echo "Exiting..."; exit 0 ;;
