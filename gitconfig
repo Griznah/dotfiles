@@ -12,10 +12,13 @@
   ru = remote update
   fs = !git fetch && git status
   cm = commit -m
+  cma = commit -am
+  cfp = cat-file -p
+  sw = switch
 [color]
   ui = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pull]
   rebase = false
 [apply]
