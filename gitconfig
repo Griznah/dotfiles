@@ -1,25 +1,33 @@
 [user]
   name = Griznah
   email = oms@griznah.net
+
 [core]
   editor = vim
   quotepath = false
+
 [alias]
   co = checkout
   br = branch
+  bl = branch -l
   ci = commit
   st = status
   ru = remote update
   fs = !git fetch && git status
   cm = commit -m
   cma = commit -am
-  cfp = cat-file -p
-  sw = switch
+  prune = fetch --prune
+  ma = switch main
+  map = !git switch main && git pull
+
 [color]
   ui = true
+
 [init]
   defaultBranch = main
+
 [pull]
   rebase = false
+
 [apply]
   whitespace = fix
