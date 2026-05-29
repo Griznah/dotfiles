@@ -23,5 +23,6 @@ alias k='kubectl'
 alias h='helm'
 alias kga='kubectl get all'
 alias kgp='kubectl get pods'
+# tab completions
 complete -o default -F __start_kubectl k
-complete -o default -F __start_kubectl kubecolor
+compdef kubecolor=kubectl
