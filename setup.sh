@@ -4,7 +4,7 @@
 # Author: Ole-Magnus Sæther aka Griznah - 2025-03-17
 
 # Define variables
-DOTFILES_DIR="$HOME/repos/dotfiles"
+DOTFILES_DIR=$(pwd)
 BACKUP_DIR="$HOME/dotfiles_backup"
 GENERIC_CONFIG_FILES=("vimrc" "gitconfig") # Add your dotfiles here
 
