@@ -140,7 +140,7 @@ install_devops_tools() {
   echo "Installing Kubernetes tools..."
   ensure_homebrew_installed
   # List of Kubernetes tools to install
-  devops_tools=("argocd" "kubectl" "talosctl" "kustomize" "ansible" "opentofu" "k9s")
+  devops_tools=("argocd" "kubectl" "kubectx" "talosctl" "kustomize" "ansible" "opentofu" "k9s")
 
   for tool in "${devops_tools[@]}"; do
     if ! brew list "$tool" &>/dev/null; then
