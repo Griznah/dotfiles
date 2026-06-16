@@ -121,7 +121,7 @@ install_common_software() {
   echo "Installing dependencies..."
   ensure_homebrew_installed
   # List of software to install
-  SOFTWARE_LIST=("fzf" "zoxide" "eza" "bat" "yq" "sd" "fd" "ripgrep" "httpie" "ncdu" "duf")
+  SOFTWARE_LIST=("fzf" "zoxide" "eza" "bat" "jq" "yq" "sd" "fd" "ripgrep" "httpie" "ncdu" "duf")
 
   for software in "${SOFTWARE_LIST[@]}"; do
     if ! brew list "$software" &>/dev/null; then

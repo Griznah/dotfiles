@@ -124,6 +124,8 @@ export HSA_OVERRIDE_GFX_VERSION=11.0.0
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias za='zellij attach'
+alias scc-update='cd ~/.claude && git fetch workflow && git merge workflow/main --allow-unrelated-histories'
 
 # editor-style command-line-editing
 autoload edit-command-line
