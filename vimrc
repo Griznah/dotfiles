@@ -52,5 +52,6 @@ filetype plugin on
 " Put your non-Plugin stuff after this line
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
+set nu rnu
 "colo desert
 
