@@ -43,7 +43,7 @@ install_zsh() {
       echo "Homebrew is not installed. Please install Homebrew via dependencies choice and rerun this choice after."
       exit 1
     fi
-    brew install zsh
+    brew install -y zsh
   else
     echo "zsh is already installed."
   fi
@@ -126,7 +126,7 @@ install_common_software() {
   for software in "${SOFTWARE_LIST[@]}"; do
     if ! brew list "$software" &>/dev/null; then
       echo "$software not found. Installing $software..."
-      brew install "$software"
+      brew install -y "$software"
     else
       echo "$software is already installed."
     fi
@@ -145,7 +145,7 @@ install_devops_tools() {
   for tool in "${devops_tools[@]}"; do
     if ! brew list "$tool" &>/dev/null; then
       echo "$tool not found. Installing $tool..."
-      brew install "$tool"
+      brew install -y "$tool"
     else
       echo "$tool is already installed."
     fi
